@@ -1,17 +1,27 @@
 package ru.airlightvt.onlinerecognition.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import ru.airlightvt.onlinerecognition.queue.MessagePublisher;
 import ru.airlightvt.onlinerecognition.queue.MessagePublisherImpl;
 import ru.airlightvt.onlinerecognition.queue.MessageSubscriber;
+import ru.airlightvt.onlinerecognition.queue.model.QueueMessage;
+import ru.airlightvt.onlinerecognition.queue.model.QueueMessageType;
 
 import javax.inject.Named;
 import java.util.concurrent.CountDownLatch;
@@ -30,10 +40,7 @@ public class RedisConfig {
      */
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-        jedisConFactory.setHostName("127.0.0.1");
-        jedisConFactory.setPort(6379);
-        return jedisConFactory;
+        return new JedisConnectionFactory();
     }
 
     /**
@@ -41,11 +48,11 @@ public class RedisConfig {
      * key: String, value: Serializable to String object
      * @return RedisTemplate<String, Object>
      */
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        final RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+    @Bean(name="redisGenericTemplate")
+    public RedisTemplate<String, QueueMessage> redisGenericTemplate() {
+        final RedisTemplate<String, QueueMessage> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
-        template.setValueSerializer(new GenericToStringSerializer<Object>(Object.class));
+        template.setValueSerializer(new GenericToStringSerializer<>(QueueMessage.class));
         return template;
     }
 
@@ -56,7 +63,7 @@ public class RedisConfig {
     @Named(value = "redisPublisher")
     @Bean
     MessagePublisher redisPublisher() {
-        return new MessagePublisherImpl(redisTemplate(), topic());
+        return new MessagePublisherImpl(redisJacksonTemplate(jedisConnectionFactory()), topicArticleUpdateReq());
     }
 
     /**
@@ -66,18 +73,19 @@ public class RedisConfig {
      */
     @Bean
     MessageListenerAdapter messageListener(CountDownLatch latch) {
-        return new MessageListenerAdapter(new MessageSubscriber(latch));
+        return new MessageListenerAdapter(new MessageSubscriber(latch, redisJacksonTemplate(jedisConnectionFactory())));
     }
 
     /**
      * Контейнер слушателей сообщений из очередей redis
+     * TODO поменять канал в очереди redis
      * @return
      */
     @Bean
     RedisMessageListenerContainer redisContainer() {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(jedisConnectionFactory());
-        container.addMessageListener(messageListener(latch()), topic());
+        container.addMessageListener(messageListener(latch()), topicArticleUpdateReq());
         return container;
     }
 
@@ -91,7 +99,24 @@ public class RedisConfig {
      * @return ChannelTopic
      */
     @Bean
-    ChannelTopic topic() {
-        return new ChannelTopic("pubsub:queue");
+    ChannelTopic topicArticleUpdateReq() {
+        return new ChannelTopic(QueueMessageType.UPDATE_ARTICLE_REQ.getChannelName());
+    }
+
+    @Bean(name="redisJacksonTemplate")
+    public RedisTemplate<String, Object> redisJacksonTemplate(@Qualifier("jedisConnectionFactory") RedisConnectionFactory factory) {
+
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(QueueMessage.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(redisSerializer);
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
+        return template;
     }
 }
