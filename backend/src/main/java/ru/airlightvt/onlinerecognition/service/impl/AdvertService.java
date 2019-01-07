@@ -31,6 +31,11 @@ public class AdvertService implements IAdvertService {
     }
 
     @Override
+    public List<Advert> findAll() {
+        return Lists.newArrayList(advertRepository.findAll());
+    }
+
+    @Override
     public Iterable<Advert> getAdvertsByIds(List<Long> ids) {
         return advertRepository.findAllById(ids);
     }
