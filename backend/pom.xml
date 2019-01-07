@@ -86,13 +86,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- File upload -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.5.10.RELEASE</version>
-        </dependency>
-
         <!-- Utils -->
         <dependency>
             <groupId>com.google.guava</groupId>
