@@ -1,7 +1,5 @@
 package ru.airlightvt.onlinerecognition.entity;
 
-import ru.airlightvt.onlinerecognition.auth.entity.User;
-
 import javax.persistence.*;
 
 @Entity

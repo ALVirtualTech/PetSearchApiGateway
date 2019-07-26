@@ -1,4 +1,4 @@
-package ru.airlightvt.onlinerecognition.auth;
+package ru.airlightvt.onlinerecognition.auth.rest;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -15,6 +15,8 @@ import java.io.IOException;
 /**
  * Кастомный обработчик успешной авторизации для REST сервисов:
  * вместо редиректа с кодом 301 возвращает 200 OK
+ * (@link{SimpleUrlAuthenticationSuccessHandler} позволяет задать URL, на который перейдет после успешной авторизации)
+ *
  * @author apolyakov
  * @since 06.01.2019
  */

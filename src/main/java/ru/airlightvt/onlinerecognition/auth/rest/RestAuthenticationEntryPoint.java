@@ -1,4 +1,4 @@
-package ru.airlightvt.onlinerecognition.auth;
+package ru.airlightvt.onlinerecognition.auth.rest;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Точка входа для аутентификации по REST для ExceptionHandlingConfigurer в конфигураторе настроек безопасности
+ * Обработчик ошибок авторизации, возникающих в процессе цепочки фильтров.
+ * Используется ExceptionTranslationFilter при обработке полученной ошибки.
+ * TODO: специфицировать именно для ошибок авторизации по REST (кидать специально для этого сделанное исключение)
+ *
  * @author apolyakov
  * @since 06.01.2019
  */
@@ -18,7 +21,6 @@ import java.io.IOException;
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                "Unauthorized");
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }
