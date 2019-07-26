@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.airlightvt.onlinerecognition.entity.Advert;
-import ru.airlightvt.onlinerecognition.auth.entity.User;
+import ru.airlightvt.onlinerecognition.entity.User;
 import ru.airlightvt.onlinerecognition.repository.AdvertRepository;
-import ru.airlightvt.onlinerecognition.auth.repository.UserRepository;
+import ru.airlightvt.onlinerecognition.repository.UserRepository;
 import ru.airlightvt.onlinerecognition.service.IAdvertService;
 
 import java.util.List;

@@ -3,4 +3,4 @@
  * @author apolyakov
  * @since 5.10.2018
  */
-package ru.airlightvt.onlinerecognition.auth.repository;
+package ru.airlightvt.onlinerecognition.repository;

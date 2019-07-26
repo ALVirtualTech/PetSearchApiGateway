@@ -12,6 +12,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import ru.airlightvt.onlinerecognition.auth.rest.CustomSavedRequestAwareAuthenticationSuccessHandler;
+import ru.airlightvt.onlinerecognition.auth.rest.RestAuthenticationEntryPoint;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +42,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+        return org.springframework.security.crypto.factory.PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Bean
@@ -52,20 +59,34 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
                 .csrf().disable() // !!! enable in production mode
                 .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
+                    .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/web").authenticated()
-                .antMatchers("/api/web/admin/**").hasRole("ADMIN")
+                    .antMatchers("/api/web").authenticated()
+                    .antMatchers("/api/web/admin/**").hasRole("ADMIN")
                 .and()
                 // authentication processing filter: org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
                 // formLogin create this filter and provide additional methods (onSuccess and onFailure)
                 .formLogin()
-                .successHandler(customSuccessHandler())
-                .failureHandler(customFailureHandler())
+                    .successHandler(customSuccessHandler())
+                    .failureHandler(customFailureHandler())
                 .and()
                 .logout();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

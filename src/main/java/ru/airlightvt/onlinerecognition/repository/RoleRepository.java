@@ -1,7 +1,7 @@
-package ru.airlightvt.onlinerecognition.auth.repository;
+package ru.airlightvt.onlinerecognition.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.airlightvt.onlinerecognition.auth.entity.Role;
+import ru.airlightvt.onlinerecognition.entity.Role;
 
 /**
  * CRUD репозиторий для работы с сущностью "Роль"

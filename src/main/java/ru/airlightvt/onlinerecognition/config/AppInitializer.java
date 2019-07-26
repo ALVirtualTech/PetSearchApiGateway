@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.airlightvt.onlinerecognition.auth.entity.Role;
-import ru.airlightvt.onlinerecognition.auth.entity.User;
-import ru.airlightvt.onlinerecognition.auth.repository.RoleRepository;
-import ru.airlightvt.onlinerecognition.auth.repository.UserRepository;
+import ru.airlightvt.onlinerecognition.entity.Role;
+import ru.airlightvt.onlinerecognition.entity.User;
+import ru.airlightvt.onlinerecognition.repository.RoleRepository;
+import ru.airlightvt.onlinerecognition.repository.UserRepository;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,15 +22,14 @@ import java.util.Set;
  */
 @Component
 public class AppInitializer implements ApplicationListener<ContextRefreshedEvent> {
-    private boolean alreadySetup = false;
-
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private boolean alreadySetup = false;
+    private PasswordEncoder encoder;
 
     @Autowired
-    public AppInitializer(UserRepository userRepository, RoleRepository roleRepository) {
+    public AppInitializer(UserRepository userRepository,  PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.encoder = passwordEncoder;
     }
 
     @Transactional
@@ -40,31 +39,11 @@ public class AppInitializer implements ApplicationListener<ContextRefreshedEvent
             return;
         }
 
-        Role adminRole = CheckForAdminRole();
-        Role userRole = CheckForUserRole();
+        Role adminRole = Role.ROLE_ADMIN;
+        Role userRole = Role.ROLE_USER;
         CheckForAdminUser(Sets.newHashSet(adminRole, userRole));
 
         alreadySetup = true;
-    }
-
-    private Role CheckForUserRole() {
-        Role userRole  = roleRepository.getByRoleName("USER");
-        if(userRole == null){
-            userRole = new Role();
-            userRole.setRoleName("USER");
-            return roleRepository.save(userRole);
-        }
-        return  userRole;
-    }
-
-    private Role CheckForAdminRole() {
-        Role adminRole  = roleRepository.getByRoleName("ADMIN");
-        if(adminRole == null){
-            adminRole = new Role();
-            adminRole.setRoleName("ADMIN");
-            return roleRepository.save(adminRole);
-        }
-        return  adminRole;
     }
 
     private void CheckForAdminUser(Set<Role> roles) {
@@ -75,7 +54,7 @@ public class AppInitializer implements ApplicationListener<ContextRefreshedEvent
             adminUser = new User();
             adminUser.setLogin("admin");
             adminUser.setEnabled(true);
-            adminUser.setPassword(new BCryptPasswordEncoder().encode("admin"));
+            adminUser.setPassword(encoder.encode("admin"));
             adminUser.setRoles(roles);
             userRepository.save(adminUser);
         }
