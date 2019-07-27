@@ -71,6 +71,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .and()
                 // authentication processing filter: org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
                 // formLogin create this filter and provide additional methods (onSuccess and onFailure)
+                // so we can use URL "/login" to log in by REST
                 .formLogin()
                     .successHandler(customSuccessHandler())
                     .failureHandler(customFailureHandler())

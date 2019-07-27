@@ -1,4 +1,4 @@
-package ru.airlightvt.onlinerecognition.config;
+package ru.airlightvt.onlinerecognition.config.migration;
 
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +53,8 @@ public class AppInitializer implements ApplicationListener<ContextRefreshedEvent
         if(adminUser == null) {
             adminUser = new User();
             adminUser.setLogin("admin");
+            adminUser.setEmail("admin@admin.ru");
+            adminUser.setName("admin");
             adminUser.setEnabled(true);
             adminUser.setPassword(encoder.encode("admin"));
             adminUser.setRoles(roles);

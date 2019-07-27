@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 @JsonIgnoreProperties(value= {"roles"})
 public class User extends AbstractNamedEntity implements HasEmail, Serializable {
     @Column(name = "login", nullable = false, unique = true)
