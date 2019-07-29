@@ -4,4 +4,4 @@
  * @since 5.10.2018
  */
 
-package ru.airlightvt.onlinerecognition.rest.dto;
+package ru.airlightvt.onlinerecognition.shared.dto;

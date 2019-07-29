@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class AbstractBaseEntity  implements Persistable<Long>, Identifiable<Long> {
+public class AbstractBaseEntity  implements Persistable<Long>, Identifiable<Long>, HasId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;

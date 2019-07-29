@@ -10,19 +10,24 @@ import java.util.List;
 public interface IAdvertService {
     /**
      * Найти все объявления заданного пользователя
+     *
      * @param userId id пользователя
      * @return список объявлений
      */
     List<Advert> findAllUserAdverts(long userId);
 
+    List<Advert> findAllUserAdverts(long userId, long startPosition, int portion);
+
     /**
      * Найти все объявления, хранящиеся в системе
+     *
      * @return список объявлений
      */
     List<Advert> findAll();
 
     /**
      * Получить список объявлений по списку id
+     *
      * @param ids список идентификаторов объявлений
      * @return список объявлений
      */
