@@ -12,5 +12,5 @@ import ru.airlightvt.onlinerecognition.entity.User;
 public interface UserRepository extends CrudRepository<User, Long> {
     User getByLogin(String login);
 
-    User getById(Integer id);
+    User getById(Long id);
 }
