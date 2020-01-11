@@ -9,6 +9,7 @@
         <module>parent</module>
         <module>api-gateway</module>
         <module>services-config</module>
+        <module>advert-service</module>
     </modules>
 
     <artifactId>pets-search-service</artifactId>
