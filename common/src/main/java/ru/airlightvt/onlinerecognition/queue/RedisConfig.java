@@ -1,11 +1,10 @@
-package ru.airlightvt.onlinerecognition.config;
+package ru.airlightvt.onlinerecognition.queue;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -17,13 +16,9 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import ru.airlightvt.onlinerecognition.queue.MessagePublisher;
-import ru.airlightvt.onlinerecognition.queue.MessagePublisherImpl;
-import ru.airlightvt.onlinerecognition.queue.MessageSubscriber;
 import ru.airlightvt.onlinerecognition.queue.model.QueueMessage;
 import ru.airlightvt.onlinerecognition.queue.model.QueueMessageType;
 
-import javax.inject.Named;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -32,7 +27,7 @@ import java.util.concurrent.CountDownLatch;
  * @since 23.06.2018
  */
 @Configuration
-@ComponentScan("ru.ru.ru.airlightvt.ru.ru.airlightvt.ru.airlightvt.onlinerecognition")
+//@ComponentScan("ru.airlightvt.onlinerecognition.queue")
 public class RedisConfig {
     /**
      * Фабрика для конструирования соединия с redis
@@ -60,7 +55,7 @@ public class RedisConfig {
      * Отправитель сообщений в очередь redis
      * @return MessagePublisher
      */
-    @Named(value = "redisPublisher")
+    @Qualifier("redisPublisher")
     @Bean
     MessagePublisher redisPublisher() {
         return new MessagePublisherImpl(redisJacksonTemplate(jedisConnectionFactory()), topicArticleUpdateReq());

@@ -1,25 +1,23 @@
 package ru.airlightvt.onlinerecognition;
 
-import ru.airlightvt.onlinerecognition.queue.MessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
+import ru.airlightvt.onlinerecognition.queue.MessagePublisher;
 
 import java.util.concurrent.CountDownLatch;
 
 @SpringBootApplication
 @EnableAsync
-@EnableDiscoveryClient
-public class OnlineRecognitionApplication {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OnlineRecognitionApplication.class);
+public class ApiGatewayApplication {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiGatewayApplication.class);
 
     public static void main(String[] args) throws InterruptedException {
-        ApplicationContext ctx = new SpringApplicationBuilder(OnlineRecognitionApplication.class)
+        ApplicationContext ctx = new SpringApplicationBuilder(ApiGatewayApplication.class)
                 .web(WebApplicationType.SERVLET).run(args);
 //        ApplicationContext ctx = SpringApplication.run(OnlineRecognitionApplication.class, args);
 
