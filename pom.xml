@@ -8,9 +8,11 @@
         <module>common</module>
         <module>parent</module>
         <module>api-gateway</module>
+        <module>services-config</module>
     </modules>
 
     <artifactId>pets-search-service</artifactId>
+    <groupId>ru.airlightvt</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pets-search-service</name>
     <description>Backend for searching lost pets</description>

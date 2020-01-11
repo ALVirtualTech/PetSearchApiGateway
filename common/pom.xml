@@ -14,8 +14,11 @@
         <java.version>1.8</java.version>
         <guava.version>19.0</guava.version>
         <javax.inject.version>1</javax.inject.version>
+        <javax.validation.version>2.1.6.Final</javax.validation.version>
         <spring.version>5.2.1.RELEASE</spring.version>
         <lombok.version>1.18.10</lombok.version>
+        <postgresql.version>42.2.5</postgresql.version>
+        <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -25,13 +28,29 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Utils -->
+        <!-- DB -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.1.1.RELEASE</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.0.Final</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -39,6 +58,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Redis messaging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

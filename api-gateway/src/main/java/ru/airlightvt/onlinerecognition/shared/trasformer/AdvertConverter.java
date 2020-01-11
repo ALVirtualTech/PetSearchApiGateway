@@ -14,6 +14,16 @@ public class AdvertConverter {
 
     public static AdvertDto convert(Advert source)
     {
-        return source == null ? null : new AdvertDto(source);
+        return source == null ? null : AdvertDto.builder()
+                .id(source.id())
+                .title(source.getTitle())
+                .breed(source.getBreed())
+                .coatColor(source.getCoatColor())
+                .description(source.getDescription())
+                .height(source.getHeight())
+                .weight(source.getWeight())
+                .vaccinations(source.isVaccinations())
+                .image(source.getImage())
+                .build();
     }
 }

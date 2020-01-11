@@ -1,5 +1,6 @@
 package ru.airlightvt.onlinerecognition.entity;
 
+import ru.airlightvt.onlinerecognition.data.entity.AbstractNamedEntity;
 import ru.airlightvt.onlinerecognition.shared.dto.AdvertDto;
 
 import javax.persistence.*;

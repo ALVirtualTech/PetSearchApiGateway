@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class QueueMessage implements Serializable {
+    private static final long serialVersionUID = -7860755788485783784L;
+
     private long id;
     private byte[] image;
     private long articleId;
