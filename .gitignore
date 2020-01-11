@@ -23,3 +23,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/api-gateway/target/
+/common/target/
+/inttest/target/
+/services-config/target/

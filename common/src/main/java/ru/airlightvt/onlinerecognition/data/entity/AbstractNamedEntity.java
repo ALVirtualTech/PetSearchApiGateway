@@ -1,7 +1,6 @@
-package ru.airlightvt.onlinerecognition.entity;
+package ru.airlightvt.onlinerecognition.data.entity;
 
 import org.hibernate.validator.constraints.SafeHtml;
-import ru.airlightvt.onlinerecognition.config.View;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

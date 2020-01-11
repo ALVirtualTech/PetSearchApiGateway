@@ -1,4 +1,4 @@
-package ru.airlightvt.onlinerecognition.config;
+package ru.airlightvt.onlinerecognition.data.entity;
 
 import javax.validation.groups.Default;
 

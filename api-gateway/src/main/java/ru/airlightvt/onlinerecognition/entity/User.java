@@ -7,7 +7,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
-import ru.airlightvt.onlinerecognition.config.View;
+import ru.airlightvt.onlinerecognition.data.entity.View;
+import ru.airlightvt.onlinerecognition.data.entity.AbstractNamedEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

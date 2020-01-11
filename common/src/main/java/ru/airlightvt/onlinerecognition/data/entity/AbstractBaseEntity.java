@@ -1,8 +1,7 @@
-package ru.airlightvt.onlinerecognition.entity;
+package ru.airlightvt.onlinerecognition.data.entity;
 
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
-import org.springframework.hateoas.Identifiable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class AbstractBaseEntity  implements Persistable<Long>, Identifiable<Long>, HasId {
+public class AbstractBaseEntity  implements Persistable<Long>, Identifiable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
