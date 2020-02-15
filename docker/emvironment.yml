@@ -1,0 +1,55 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+#    network_mode: "host"
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - /my/own/datadir:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  rabbitmq:
+    image: 'bitnami/rabbitmq:3.8'
+    ports:
+      - '4369:4369'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    network_mode: "host"
+    volumes:
+#        - 'rabbitmq_data:/bitnami'
+      - /path/to/rabbitmq-persistence:/bitnami
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    network_mode: "host"
+    volumes:
+      - /path/to/redis-persistence:/bitnami/redis/data
+#    networks:
+#      - app-tier
+
+#  myapp:
+#    image: 'YOUR_APPLICATION_IMAGE'
+#    networks:
+#      - app-tier
+
+#networks:
+#  app-tier:
+#    driver: bridge
+
+#volumes:
+#  rabbitmq_data:
+#    driver: local

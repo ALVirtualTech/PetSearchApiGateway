@@ -28,3 +28,9 @@
 /inttest/target/
 /services-config/target/
 /advert-service/target/
+
+/.idea/ZeppelinRemoteNotebooks/
+/.idea/libraries/
+/.idea/codeStyles/
+/.idea/inspectionProfiles/
+/.idea/*.*
