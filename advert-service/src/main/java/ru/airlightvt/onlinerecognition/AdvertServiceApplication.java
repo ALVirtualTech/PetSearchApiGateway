@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
-@ComponentScan("ru.airlightvt.onlinerecognition.queue")
+@ComponentScan("ru.airlightvt.onlinerecognition.common.queue")
 public class AdvertServiceApplication {
     @Value("${test}")
     private String val;

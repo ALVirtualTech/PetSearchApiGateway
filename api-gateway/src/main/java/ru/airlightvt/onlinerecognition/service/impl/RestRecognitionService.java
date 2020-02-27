@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.airlightvt.onlinerecognition.service.IConsulService;
-import ru.airlightvt.onlinerecognition.shared.Constants;
+import ru.airlightvt.onlinerecognition.common.data.entity.Constants;
 
 import javax.naming.ServiceUnavailableException;
 import java.net.URI;
