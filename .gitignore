@@ -34,3 +34,7 @@
 /.idea/codeStyles/
 /.idea/inspectionProfiles/
 /.idea/*.*
+/flyway-migration/target/
+/services-discovery-server/target/
+/security/target/
+/storage-service/target/

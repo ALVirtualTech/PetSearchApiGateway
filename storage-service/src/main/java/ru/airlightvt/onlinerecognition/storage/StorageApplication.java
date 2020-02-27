@@ -1,11 +1,11 @@
-package ru.airlightvt.onlinerecognition.db;
+package ru.airlightvt.onlinerecognition.storage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FlywayMigrationApplication {
+public class StorageApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FlywayMigrationApplication.class, args);
+        SpringApplication.run(StorageApplication.class, args);
     }
 }

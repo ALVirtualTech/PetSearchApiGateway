@@ -2,6 +2,9 @@ spring:
   application:
     name: flyway-migration
 
+  flyway:
+    enabled:true
+
 
   # ===============================
   # DATASOURCE

@@ -1,32 +1,19 @@
 package ru.airlightvt.onlinerecognition.db.migration;
 
 import com.google.common.collect.Sets;
-import org.flywaydb.core.api.migration.spring.SpringJdbcMigration;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.flywaydb.core.api.migration.BaseJavaMigration;
+import org.flywaydb.core.api.migration.Context;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import ru.airlightvt.onlinerecognition.db.config.SpringUtils;
 import ru.airlightvt.onlinerecognition.security.entity.Role;
 import ru.airlightvt.onlinerecognition.security.entity.User;
 import ru.airlightvt.onlinerecognition.security.repository.UserRepository;
 
 import java.util.Set;
 
-@Component
-public class V1__CreateAdminUser implements SpringJdbcMigration {
-    private final UserRepository userRepository;
-    private final PasswordEncoder encoder;
-
-    public V1__CreateAdminUser(UserRepository userRepository, PasswordEncoder encoder) {
-        this.userRepository = userRepository;
-        this.encoder = encoder;
-    }
-
-    @Override
-    public void migrate(JdbcTemplate jdbcTemplate) {
-        Role adminRole = Role.ROLE_ADMIN;
-        Role userRole = Role.ROLE_USER;
-        CheckForAdminUser(Sets.newHashSet(adminRole, userRole));
-    }
+public class V1__CreateAdminUser extends BaseJavaMigration {
+    private final UserRepository userRepository = SpringUtils.getBean(UserRepository.class);
+    private final PasswordEncoder encoder = SpringUtils.getBean(PasswordEncoder.class);
 
     private void CheckForAdminUser(Set<Role> roles) {
         User adminUser = userRepository.getByLogin("admin");
@@ -41,5 +28,12 @@ public class V1__CreateAdminUser implements SpringJdbcMigration {
             adminUser.setRoles(roles);
             userRepository.save(adminUser);
         }
+    }
+
+    @Override
+    public void migrate(Context context) throws Exception {
+        Role adminRole = Role.ROLE_ADMIN;
+        Role userRole = Role.ROLE_USER;
+        CheckForAdminUser(Sets.newHashSet(adminRole, userRole));
     }
 }
