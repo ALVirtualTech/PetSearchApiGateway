@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
-import ru.airlightvt.onlinerecognition.queue.MessagePublisher;
+import ru.airlightvt.onlinerecognition.common.queue.MessagePublisher;
 
 import java.util.concurrent.CountDownLatch;
 

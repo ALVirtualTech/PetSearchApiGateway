@@ -8,9 +8,11 @@
         <module>common</module>
         <module>parent</module>
         <module>api-gateway</module>
+        <module>storage-service</module>
         <module>services-config</module>
         <module>advert-service</module>
         <module>services-discovery-server</module>
+        <module>security</module>
     </modules>
 
     <artifactId>pets-search-service</artifactId>

@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RestServiceController {
     @RequestMapping(value = "/pets", method = RequestMethod.POST)
     public ResponseEntity<?> uploadFile(
-            @RequestParam("petPhoto") MultipartFile petFoto) {
+            @RequestBody MultipartFile petFoto) {
 
         return new ResponseEntity<>("Successfully uploaded - " +
                 petFoto.getOriginalFilename(), new HttpHeaders(), HttpStatus.OK);
