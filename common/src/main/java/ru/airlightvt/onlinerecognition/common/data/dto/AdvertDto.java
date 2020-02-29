@@ -21,7 +21,7 @@ public class AdvertDto implements Serializable {
     private long id;
     private String title;
     private String description;
-    private String image;
+    private Long imageId;
     private String breed;
     private boolean vaccinations;
     private float height;

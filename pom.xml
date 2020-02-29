@@ -6,13 +6,14 @@
     <modules>
         <module>inttest</module>
         <module>common</module>
-        <module>parent</module>
+        <module>boot-parent</module>
+        <module>security</module>
         <module>api-gateway</module>
         <module>storage-service</module>
         <module>services-config</module>
         <module>advert-service</module>
-<!--        <module>services-discovery-server</module>-->
-        <module>security</module>
+        <module>flyway-migration</module>
+        <!--        <module>services-discovery-server</module>-->
     </modules>
 
     <artifactId>pets-search-service</artifactId>

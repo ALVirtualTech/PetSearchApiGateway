@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import ru.airlightvt.onlinerecognition.common.queue.model.QueueMessage;
-import ru.airlightvt.onlinerecognition.common.queue.model.QueueMessageType;
+import ru.airlightvt.onlinerecognition.common.transport.mq.QueueTopics;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -95,7 +95,7 @@ public class RedisConfig {
      */
     @Bean
     ChannelTopic topicArticleUpdateReq() {
-        return new ChannelTopic(QueueMessageType.UPDATE_ARTICLE_REQ.getChannelName());
+        return new ChannelTopic(QueueTopics.UPDATE_ARTICLE_REQ.getChannelName());
     }
 
     @Bean(name="redisJacksonTemplate")
