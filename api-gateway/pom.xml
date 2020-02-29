@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>boot-parent</artifactId>
         <groupId>ru.airlightvt</groupId>
-        <relativePath/>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>./../boot-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>api-gateway</artifactId>

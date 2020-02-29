@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>boot-parent</artifactId>
         <groupId>ru.airlightvt</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/>
+        <relativePath>./../boot-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>advert-service</artifactId>
@@ -17,6 +17,13 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- Utils -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>ru.airlightvt</groupId>
             <artifactId>common</artifactId>
