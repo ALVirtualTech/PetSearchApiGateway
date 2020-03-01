@@ -35,5 +35,5 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
-
-test: 123test
+transport:
+  type: rabbitmq

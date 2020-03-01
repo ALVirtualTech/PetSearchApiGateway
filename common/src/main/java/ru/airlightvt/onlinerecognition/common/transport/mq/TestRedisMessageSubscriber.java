@@ -1,19 +1,17 @@
-package ru.airlightvt.onlinerecognition.common.queue;
+package ru.airlightvt.onlinerecognition.common.transport.mq;
 
-import ru.airlightvt.onlinerecognition.common.queue.model.QueueMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
+import ru.airlightvt.onlinerecognition.common.queue.model.QueueMessage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * Сервис, обработки ответных сообщений от ML-модели
@@ -21,19 +19,17 @@ import java.util.concurrent.CountDownLatch;
  * @since 23.06.2018
  */
 @Service
-public class MessageSubscriber implements MessageListener {
-    private RedisTemplate<String, Object> redisTemplate;
+public class TestRedisMessageSubscriber implements MessageListener {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestRedisMessageSubscriber.class);
+
+    private RedisTemplate<String, ru.airlightvt.onlinerecognition.common.transport.Message> redisTemplate;
     public static List<String> messageList = new ArrayList<String>();
     public static List<QueueMessage> messages = new ArrayList<>();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageSubscriber.class);
-
-    private CountDownLatch latch;
 
     @Autowired
-    public MessageSubscriber(CountDownLatch latch, @Qualifier("redisJacksonTemplate") RedisTemplate<String, Object> redisTemplate)
+    public TestRedisMessageSubscriber(RedisTemplate<String, ru.airlightvt.onlinerecognition.common.transport.Message> redisTemplate)
     {
-        this.latch = latch;
         this.redisTemplate =redisTemplate;
     }
 
@@ -43,7 +39,7 @@ public class MessageSubscriber implements MessageListener {
         QueueMessage deserializedMessage = (QueueMessage) valueSerializer.deserialize(message.getBody());
         messageList.add(message.toString());
         messages.add(deserializedMessage);
-        System.out.println("Message received: " + new String(deserializedMessage.toString()));
+        System.out.println("Message received: " + deserializedMessage.toString());
         //latch.countDown();
     }
 }

@@ -1,4 +1,4 @@
-package ru.airlightvt.onlinerecognition.common.transport.mq;
+package ru.airlightvt.onlinerecognition.common.transport;
 
 import java.io.Serializable;
 
