@@ -1,5 +1,7 @@
 package ru.airlightvt.onlinerecognition.advert.entity;
 
+import com.google.common.collect.Lists;
+import io.eventuate.tram.events.ResultWithEvents;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +27,11 @@ public class Advert extends AbstractNamedEntity implements Serializable {
     private Long author;
     private Long photoId;
 
-    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)
+    private AdvertState state;
+
+    //@OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)
+    @ElementCollection
+    @CollectionTable(name = "advert_images")
     private List<AdvertImage> images;
 
     @ManyToMany(mappedBy = "adverts", cascade = CascadeType.ALL)
@@ -50,6 +56,12 @@ public class Advert extends AbstractNamedEntity implements Serializable {
         this.height = source.getHeight();
         this.weight = source.getWeight();
         this.coatColor = source.getCoatColor();
+    }
+
+    public static ResultWithEvents<Advert> createAdvert(AdvertDto advertDto) {
+        Advert advert = new Advert(advertDto);
+        // TODO: there should be list of domain events
+        return new ResultWithEvents<>(advert, Lists.newArrayList());
     }
 
     public String getTitle() {

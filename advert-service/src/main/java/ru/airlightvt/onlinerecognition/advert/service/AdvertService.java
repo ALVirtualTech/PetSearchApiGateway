@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Сервис работы с объявлениями
  */
-public interface IAdvertService {
+public interface AdvertService {
     /**
      * Найти все объявления заданного пользователя
      *
@@ -32,4 +32,8 @@ public interface IAdvertService {
      * @return список объявлений
      */
     Iterable<Advert> getAdvertsByIds(List<Long> ids);
+
+    Advert approveAdvert(long advertId);
+
+    void rejectAdvert(long advertId);
 }

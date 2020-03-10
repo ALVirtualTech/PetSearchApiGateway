@@ -9,7 +9,9 @@ public enum QueueTopic {
     UPDATE_ADVERT_REQ("UPDATE.ADVERT.INPUT"),
     UPDATE_ADVERT_RES("UPDATE.ADVERT.OUTPUT"),
     SEARCH_PET_REQ("SEARCH.PET.INPUT"),
-    CREATE_PET_RES("SEARCH.PET.OUTPUT");
+    CREATE_PET_RES("SEARCH.PET.OUTPUT"),
+
+    ADVERT_SERVICE_CHANNEL("advert.service.channel");
 
     private final String channelName;
 

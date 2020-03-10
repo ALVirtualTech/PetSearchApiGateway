@@ -19,7 +19,20 @@
         <lombok.version>1.18.10</lombok.version>
         <postgresql.version>42.2.5</postgresql.version>
         <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
+        <eventuate-tram-sagas-version>0.11.1.RELEASE</eventuate-tram-sagas-version>
+        <eventuate-tram-core-version>0.21.3.RELEASE</eventuate-tram-core-version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+        <repository>
+            <id>bintray</id>
+            <url>https://dl.bintray.com/eventuateio-oss/eventuate-maven-release</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -76,6 +89,32 @@
             <version>2.2.5.RELEASE</version>
         </dependency>
 
+        <!-- Saga -->
+        <!--        For saga's clients -->
+        <dependency>
+            <groupId>io.eventuate.tram.sagas</groupId>
+            <artifactId>eventuate-jpa-sagas-framework</artifactId>
+            <version>${eventuate-tram-sagas-version}</version>
+        </dependency>
+        <!--        For saga's orchestrator -->
+        <dependency>
+            <groupId>io.eventuate.tram.sagas</groupId>
+            <artifactId>eventuate-tram-sagas-simple-dsl</artifactId>
+            <version>${eventuate-tram-sagas-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.eventuate.tram.core</groupId>
+            <artifactId>eventuate-tram-jdbc-rabbitmq</artifactId>
+            <version>${eventuate-tram-core-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.eventuate.tram.core</groupId>
+            <artifactId>eventuate-tram-in-memory</artifactId>
+            <version>${eventuate-tram-core-version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

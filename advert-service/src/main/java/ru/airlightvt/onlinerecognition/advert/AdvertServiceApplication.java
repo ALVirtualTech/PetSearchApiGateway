@@ -9,6 +9,7 @@ import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
 @ComponentScan(value = {
+        "ru.airlightvt.onlinerecognition.advert",
         "ru.airlightvt.onlinerecognition.common.queue",
         "ru.airlightvt.onlinerecognition.common.transport"
 })
