@@ -14,15 +14,12 @@ import org.springframework.context.event.EventListener;
         "ru.airlightvt.onlinerecognition.common.transport"
 })
 public class AdvertServiceApplication {
-    @Value("${test}")
-    private String val;
-
     public static void main(String[] args) {
         SpringApplication.run(AdvertServiceApplication.class);
     }
 
     @EventListener
     public void onContextStart(ContextStartedEvent event) {
-        System.out.println(val);
+
     }
 }

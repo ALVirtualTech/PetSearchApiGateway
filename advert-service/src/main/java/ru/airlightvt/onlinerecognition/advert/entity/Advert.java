@@ -34,7 +34,7 @@ public class Advert extends AbstractNamedEntity implements Serializable {
     @CollectionTable(name = "advert_images")
     private List<AdvertImage> images;
 
-    @ManyToMany(mappedBy = "adverts", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
 
     @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)

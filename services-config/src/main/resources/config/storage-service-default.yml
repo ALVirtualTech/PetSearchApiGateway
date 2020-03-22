@@ -2,6 +2,20 @@ spring:
   application:
     name: storage-service
 
+  # ===============================
+  # REDIS
+  # ===============================
+  redis:
+    host: localhost
+    port: 6379
+
+  # ===============================
+  # RABBITMQ
+  # ===============================
+  rabbit:
+    host: localhost
+    port: 5672
+
   #mongodb
   data:
     mongodb:
@@ -15,7 +29,7 @@ spring:
   # Set here configurations for the database connection
   # Connection url for the database
   datasource:
-    driver-class-name: org.postgresql.Driver
+#    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/pets
     username: stand
     password: stand
@@ -41,5 +55,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
+transport:
+  type: rabbitmq
 
 test: 123test

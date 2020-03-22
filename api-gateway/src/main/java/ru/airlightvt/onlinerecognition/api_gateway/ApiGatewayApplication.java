@@ -18,8 +18,6 @@ import java.util.concurrent.CountDownLatch;
 })
 @EnableAsync
 public class ApiGatewayApplication {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiGatewayApplication.class);
-
     public static void main(String[] args) {
         ApplicationContext ctx = new SpringApplicationBuilder(ApiGatewayApplication.class)
                 .web(WebApplicationType.SERVLET).run(args);

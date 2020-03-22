@@ -29,7 +29,7 @@ services:
     network_mode: "host"
     volumes:
 #        - 'rabbitmq_data:/bitnami'
-      - /path/to/rabbitmq-persistence:/bitnami
+      - ./path/to/rabbitmq-persistence:/bitnami
 
   redis:
     image: 'bitnami/redis:latest'
@@ -37,7 +37,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     network_mode: "host"
     volumes:
-      - /path/to/redis-persistence:/bitnami/redis/data
+      - ./path/to/redis-persistence:/bitnami/redis/data
 #    networks:
 #      - app-tier
 

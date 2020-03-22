@@ -29,9 +29,4 @@ public class CreateAdvertSaga implements SimpleSaga<CreateAdvertSagaState> {
     public SagaDefinition<CreateAdvertSagaState> getSagaDefinition() {
         return sagaDefinition;
     }
-
-    @Override
-    public StepBuilder<CreateAdvertSagaState> step() {
-        return null;
-    }
 }
