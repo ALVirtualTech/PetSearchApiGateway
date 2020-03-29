@@ -3,7 +3,7 @@ version: '3.1'
 
 services:
   db:
-    image: postgres
+    image: postgres:9.6
     restart: always
     ports:
       - 5432:5432
@@ -12,12 +12,6 @@ services:
       POSTGRES_PASSWORD: stand
     volumes:
       - /my/own/datadir:/var/lib/postgresql/data
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
 
   rabbitmq:
     image: 'bitnami/rabbitmq:3.8'
@@ -44,18 +38,8 @@ services:
   mongo:
     image: mongo
     restart: always
+    ports:
+      - '27017:27017'
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-#  myapp:
-#    image: 'YOUR_APPLICATION_IMAGE'
-#    networks:
-#      - app-tier
-
-#networks:
-#  app-tier:
-#    driver: bridge
-
-#volumes:
-#  rabbitmq_data:
-#    driver: local

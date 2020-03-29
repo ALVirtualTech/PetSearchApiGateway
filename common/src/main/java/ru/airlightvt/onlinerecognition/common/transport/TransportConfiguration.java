@@ -11,10 +11,12 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -28,6 +30,13 @@ import ru.airlightvt.onlinerecognition.common.queue.model.QueueMessage;
 
 import java.util.List;
 
+/**
+ * Configurations for different transport types.
+ * Now we support rabbit and redis message queries to send and receive messages.
+ *
+ * @since 01.03.2020
+ * @author apolyakov
+ */
 @Configuration
 public class TransportConfiguration {
     @Configuration
@@ -37,7 +46,7 @@ public class TransportConfiguration {
     public static class RabbitMqConfiguration {
         //настраиваем соединение с RabbitMQ
         @Bean
-        public ConnectionFactory connectionFactory(@Value("${rabbit.host}") String host, @Value("${rabbit.port}") int port) {
+        public ConnectionFactory connectionFactory(@Value("${spring.rabbit.host}") String host, @Value("${spring.rabbit.port}") int port) {
             return new CachingConnectionFactory(host, port);
         }
 
@@ -61,6 +70,8 @@ public class TransportConfiguration {
      */
     @Configuration
     @ConditionalOnProperty(value="transport.type", havingValue = "redis")
+    @ComponentScan({"ru.airlightvt.onlinerecognition.common.transport.mq"})
+    @EnableAutoConfiguration(exclude = {RabbitAutoConfiguration.class})
     public static class RedisMqConfiguration {
         /**
          * Фабрика для конструирования соединия с redis
