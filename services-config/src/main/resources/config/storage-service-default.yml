@@ -2,6 +2,28 @@ spring:
   application:
     name: storage-service
 
+  # ===============================
+  # REDIS
+  # ===============================
+  redis:
+    host: localhost
+    port: 6379
+
+  # ===============================
+  # RABBITMQ
+  # ===============================
+  rabbit:
+    host: localhost
+    port: 5672
+
+  #mongodb
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: pets
+      username: root
+      password: example
 
   # ===============================
   # DATASOURCE
@@ -9,7 +31,7 @@ spring:
   # Set here configurations for the database connection
   # Connection url for the database
   datasource:
-    driver-class-name: org.postgresql.Driver
+#    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/pets
     username: stand
     password: stand
@@ -33,7 +55,14 @@ spring:
     # Allows Hibernate to generate SQL optimized for a particular DBMS
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
+transport:
+  type: rabbitmq
 
 test: 123test

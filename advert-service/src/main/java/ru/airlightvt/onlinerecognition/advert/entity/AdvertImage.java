@@ -9,9 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Access(AccessType.FIELD)
-@Table
 @Data
 @NoArgsConstructor
 public class AdvertImage extends AbstractBaseEntity implements Serializable {
@@ -19,6 +16,6 @@ public class AdvertImage extends AbstractBaseEntity implements Serializable {
 
     private Long imageId;
 
-    @ManyToOne
-    private Advert advert;
+//    @ManyToOne
+//    private Advert advert;
 }

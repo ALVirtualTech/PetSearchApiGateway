@@ -10,6 +10,13 @@ spring:
     port: 6379
 
   # ===============================
+  # RABBITMQ
+  # ===============================
+  rabbit:
+    host: localhost
+    port: 5672
+
+  # ===============================
   # DATASOURCE
   # ===============================
   # Set here configurations for the database connection
@@ -61,3 +68,6 @@ spring:
         enabled: true
         health-check-interval: 10s
         health-check-path: /consul/health-check
+
+transport:
+  type: rabbitmq

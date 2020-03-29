@@ -1,9 +1,10 @@
 package ru.airlightvt.onlinerecognition.common.queue.model;
 
-import java.io.Serializable;
+import ru.airlightvt.onlinerecognition.common.transport.Message;
+
 import java.util.Arrays;
 
-public class QueueMessage implements Serializable {
+public class QueueMessage implements Message {
     private static final long serialVersionUID = -7860755788485783784L;
 
     private long id;
