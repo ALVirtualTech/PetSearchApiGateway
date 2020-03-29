@@ -20,6 +20,5 @@ public class AdvertServiceApplication {
 
     @EventListener
     public void onContextStart(ContextStartedEvent event) {
-
     }
 }
